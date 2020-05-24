@@ -73,7 +73,7 @@ export default function Calendar({
 								);
 							} else {
 								return (
-									<View style={styleToApply} key={keyCount}>
+									<View style={styles.empty} key={keyCount}>
 										<Text />
 									</View>
 								);

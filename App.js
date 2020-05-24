@@ -25,7 +25,7 @@ console.log(today);
 const App = () => {
 	const [currSelectedMonth, setCurrentMonth] = useState(today.nm - 1);
 	const [thisMonth, setThisMonth] = useState(today.nm);
-	const [todayDate, setToday] = useState(today.nd - 1);
+	const [todayDate, setToday] = useState(today.nd);
 
 	const IncreaseMonth = () => {
 		let currMonth = currSelectedMonth + 1;
@@ -70,11 +70,15 @@ const App = () => {
 
 			<View style={styles.details}>
 				{/* Day Details */}
-				<Text>
-					{months[currSelectedMonth]} {todayDate}
+				<Text style={styles.dateDetails}>
+					{months[currSelectedMonth]} {parseInt(todayDate)}
 				</Text>
-				<Text>{data[currSelectedMonth].days[todayDate - 1].tithi}</Text>
-				<Text>{data[currSelectedMonth].days[todayDate - 1].event}</Text>
+				<Text style={styles.dateDetails}>
+					{data[currSelectedMonth].days[todayDate - 1].tithi}
+				</Text>
+				<Text style={styles.dateDetails}>
+					{data[currSelectedMonth].days[todayDate - 1].event}
+				</Text>
 			</View>
 		</View>
 	);
@@ -95,11 +99,16 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	monthTitle: {
-		fontSize: 24,
+		fontSize: 26,
 	},
 	details: {
 		justifyContent: 'center',
 		alignItems: 'center',
+		paddingVertical: 20,
+		fontSize: 20,
+	},
+	dateDetails: {
+		fontSize: 16,
 	},
 });
 
