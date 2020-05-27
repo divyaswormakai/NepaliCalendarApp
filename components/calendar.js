@@ -22,7 +22,7 @@ export default function Calendar({
 	const showDayRow = () => {
 		return days.map((day, ind) => {
 			return (
-				<View style={styles.DayBox} key={ind}>
+				<View style={styles.DayBox} key={'day' + ind}>
 					<Text>{day}</Text>
 				</View>
 			);
@@ -36,12 +36,14 @@ export default function Calendar({
 
 		return rows.map(row => {
 			return (
+				// View for each row
 				<View style={styles.container}>
 					{cols.map(col => {
 						keyCount += 1;
 
 						let styleToApply = styles.emptyDate;
-						if (monthData.month < thisMonth) {
+						if (parseInt(monthData.month) < parseInt(thisMonth)) {
+							console.log('Gray out things');
 							styleToApply = styles.GoneDate;
 						} else if (monthData.month === thisMonth) {
 							//had to use +2 due to inconsistent indexing of data

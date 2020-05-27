@@ -10,6 +10,8 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native';
 import {data, months, days} from './data/date';
 import Calendar from './components/calendar';
+import CalendarData from './components/fetchcalendar';
+import RNCalendarEvents from 'react-native-calendar-events';
 
 const nepali = require('nepali-calendar-js');
 
@@ -19,9 +21,6 @@ const today = nepali.toNepali(
 	date.getMonth() + 1,
 	date.getDate(),
 );
-console.log(date.getFullYear(), date.getMonth() + 1, date.getDate());
-console.log(today);
-
 const App = () => {
 	const [currSelectedMonth, setCurrentMonth] = useState(today.nm - 1);
 	const [thisMonth, setThisMonth] = useState(today.nm);
@@ -32,6 +31,7 @@ const App = () => {
 		if (currMonth < 12) {
 			setCurrentMonth(currMonth);
 		}
+		setToday(1);
 	};
 
 	const DecreaseMonth = () => {
@@ -39,6 +39,7 @@ const App = () => {
 		if (currMonth >= 0) {
 			setCurrentMonth(currMonth);
 		}
+		setToday(1);
 	};
 
 	const ChangeDate = newDate => {
@@ -70,16 +71,13 @@ const App = () => {
 
 			<View style={styles.details}>
 				{/* Day Details */}
-				<Text style={styles.dateDetails}>
-					{months[currSelectedMonth]} {parseInt(todayDate)}
+				<Text>
+					{months[currSelectedMonth]} {todayDate}
 				</Text>
-				<Text style={styles.dateDetails}>
-					{data[currSelectedMonth].days[todayDate - 1].tithi}
-				</Text>
-				<Text style={styles.dateDetails}>
-					{data[currSelectedMonth].days[todayDate - 1].event}
-				</Text>
+				<Text>{data[currSelectedMonth].days[todayDate - 1].tithi}</Text>
+				<Text>{data[currSelectedMonth].days[todayDate - 1].event}</Text>
 			</View>
+			<CalendarData />
 		</View>
 	);
 };
@@ -99,16 +97,11 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	monthTitle: {
-		fontSize: 26,
+		fontSize: 24,
 	},
 	details: {
 		justifyContent: 'center',
 		alignItems: 'center',
-		paddingVertical: 20,
-		fontSize: 20,
-	},
-	dateDetails: {
-		fontSize: 16,
 	},
 });
 
